@@ -1,0 +1,16 @@
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        sCount = Counter(s)
+        chars = []
+        res = []
+
+        for ch in sCount:
+            chars.append((sCount[ch], ch))
+        
+        chars.sort(reverse=True)
+
+        for count, ch in chars:
+            for j in range(count):
+                res.append(ch)
+        
+        return "".join(res)
