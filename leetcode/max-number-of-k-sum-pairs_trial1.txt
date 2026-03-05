@@ -1,0 +1,21 @@
+class Solution:
+    def maxOperations(self, nums: List[int], k: int) -> int:
+        nums.sort()
+        opCount = 0
+
+        L = 0
+        R = len(nums)-1
+
+        while L < R:
+            summ = nums[L] + nums[R]
+
+            if summ < k:
+                L += 1
+            elif summ > k:
+                R -= 1
+            else:
+                opCount += 1
+                L += 1
+                R -= 1
+        
+        return opCount
