@@ -1,0 +1,13 @@
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        seen = set()
+
+        L = 0
+
+        for R in range(len(nums)):
+            if nums[R] not in seen:
+                nums[L] = nums[R]
+                seen.add(nums[R])
+                L += 1
+        
+        return L
