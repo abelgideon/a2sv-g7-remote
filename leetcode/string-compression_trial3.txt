@@ -1,0 +1,45 @@
+class Solution:
+    def compress(self, chars: List[str]) -> int:
+        I = 0
+        L = 0
+        R = 0
+        curr = chars[L]
+        count = 0
+
+        while R < len(chars):
+            if chars[R] != curr:
+                freq = R - L
+                chars[I] = curr
+                I += 1
+                count += 1
+
+                if freq > 1:
+                    freq = str(freq)
+                    for n in freq:
+                        chars[I] = n
+                        I += 1
+                        count += 1
+                
+                curr = chars[R]
+                L = R
+                R += 1
+            else:
+                R += 1
+        
+        if (R - L) == 1:
+            chars[I] = curr
+            count += 1
+        elif I < len(chars) - 1:
+            chars[I] = curr
+            freq = str(R - L)
+            I += 1
+            count += 1
+
+            for n in freq:
+                chars[I] = n
+                I += 1
+                count += 1
+        
+        return count
+        
+                
