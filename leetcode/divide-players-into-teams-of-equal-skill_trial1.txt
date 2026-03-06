@@ -1,0 +1,21 @@
+class Solution:
+    def dividePlayers(self, skill: List[int]) -> int:
+        skill.sort()
+        print(skill)
+
+        L = 0
+        R = len(skill) - 1
+
+        total = 0
+        reqSkill = skill[0] + skill[-1]
+
+        while L < R:
+            if skill[L] + skill[R] != reqSkill:
+                return -1
+
+            total += (skill[L] * skill[R])
+
+            L += 1
+            R -= 1
+
+        return total
