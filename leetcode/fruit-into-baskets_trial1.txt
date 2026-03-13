@@ -1,0 +1,22 @@
+class Solution:
+    def totalFruit(self, fruits: List[int]) -> int:
+        maxNum = 0
+
+        window = defaultdict(int)
+        L = 0
+        for R in range(len(fruits)):
+            window[fruits[R]] += 1
+
+            while len(window) > 2 and L <= R:
+                window[fruits[L]] -= 1
+
+                if window[fruits[L]] == 0:
+                    del window[fruits[L]]
+                
+                L += 1
+
+            maxNum = max(maxNum, R - L + 1)
+        
+
+        return maxNum
+
