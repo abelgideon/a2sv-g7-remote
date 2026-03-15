@@ -1,0 +1,19 @@
+class Solution:
+    def maxScore(self, cardPoints: List[int], k: int) -> int:
+        totalSum = sum(cardPoints)
+        runningSum = 0
+        maxPoints = 0
+        windowSize = len(cardPoints) - k
+
+        for i in range(windowSize):
+            runningSum += cardPoints[i]
+        
+        maxPoints = max(maxPoints, totalSum - runningSum)
+
+        for i in range(windowSize, len(cardPoints)):
+            runningSum -= cardPoints[i - windowSize]
+            runningSum += cardPoints[i]
+
+            maxPoints = max(maxPoints, totalSum - runningSum)
+        
+        return maxPoints
