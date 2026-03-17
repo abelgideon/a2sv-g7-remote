@@ -1,0 +1,18 @@
+class Solution:
+    def minimumRecolors(self, blocks: str, k: int) -> int:
+        minColoring = float("inf")
+        window = defaultdict(int)
+
+        for i in range(k):
+            window[blocks[i]] += 1
+        
+        minColoring = min(minColoring, k - window["B"])
+
+        for i in range(k, len(blocks)):
+            window[blocks[i]] += 1
+            window[blocks[i-k]] -= 1
+
+            minColoring = min(minColoring, k - window["B"])
+        
+        return minColoring
+        
