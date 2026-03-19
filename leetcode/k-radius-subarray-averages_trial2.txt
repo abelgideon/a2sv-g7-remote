@@ -1,0 +1,40 @@
+class Solution:
+    def getAverages(self, nums: List[int], k: int) -> List[int]:
+        windowSize = (k * 2) + 1
+
+        if len(nums) <= k or len(nums) < windowSize:
+            return [-1] * (len(nums))
+
+        if len(nums) == 1:
+            return [nums[0]]
+
+        averages = [0] * len(nums)
+        windowSize = (k * 2) + 1
+        reverse = -1
+        runningSum = 0
+        placement = k
+
+        if len(nums) < windowSize:
+            return -1
+
+        for i in range(windowSize):
+            runningSum += nums[i]
+
+            if i < k:
+                averages[i] = -1
+                averages[reverse] = -1
+                reverse -= 1
+
+        averages[placement] = runningSum // windowSize
+        placement += 1
+        
+
+        for i in range(windowSize , len(nums)):
+            runningSum += nums[i]
+            runningSum -= nums[i-windowSize] 
+
+            print(runningSum)
+            averages[placement] = runningSum // windowSize
+            placement += 1
+        
+        return averages
