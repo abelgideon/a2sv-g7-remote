@@ -1,0 +1,25 @@
+class Solution:
+    def maxTurbulenceSize(self, arr: List[int]) -> int:
+        L = 0
+        R = 1
+
+        maxLen = 1
+        prevOp = None
+
+        while R < len(arr):
+            if arr[R-1] > arr[R] and prevOp != 1:
+                maxLen = max(maxLen, R - L + 1)
+                R += 1
+                prevOp = 1
+            elif arr[R-1] < arr[R] and prevOp != -1:
+                maxLen = max(maxLen, R - L + 1)
+                R += 1
+                prevOp = -1
+            else:
+                if arr[R-1] == arr[R]:
+                    R += 1
+                L = R - 1
+                prevOp = None
+        
+        return maxLen
+            
