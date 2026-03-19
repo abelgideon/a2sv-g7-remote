@@ -1,0 +1,37 @@
+class Solution:
+    def subarraysWithKDistinct(self, nums: List[int], k: int) -> int:
+        atMostK = 0
+        atMostKminus1 = 0
+        window = defaultdict(int)
+
+        L = 0
+        for R in range(len(nums)):
+            window[nums[R]] += 1
+
+            while L <= R and len(window) > k:
+                window[nums[L]] -= 1
+
+                if window[nums[L]] == 0:
+                    del window[nums[L]]
+                
+                L += 1
+            
+            atMostK += (R - L + 1)
+        
+        window = defaultdict(int)
+
+        L = 0
+        for R in range(len(nums)):
+            window[nums[R]] += 1
+
+            while L <= R and len(window) > k-1:
+                window[nums[L]] -= 1
+
+                if window[nums[L]] == 0:
+                    del window[nums[L]]
+                
+                L += 1
+            
+            atMostKminus1 += (R - L + 1)
+        
+        return atMostK - atMostKminus1
