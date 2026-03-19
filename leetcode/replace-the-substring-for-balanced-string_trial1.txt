@@ -1,0 +1,17 @@
+class Solution:
+	def balancedString(self, s: str) -> int:
+		N = len(s)
+		counter = Counter(s)
+		minLen = N
+		freq = N // 4
+		
+		L = 0
+		for R in range(N):
+			counter[s[R]] -= 1
+			
+			while L < N and counter["Q"] <= freq and counter["W"] <= freq and counter["E"] <= freq and counter["R"] <= freq:
+				minLen = min(minLen, R - L + 1)
+				counter[s[L]] += 1
+				L += 1
+		
+		return minLen
