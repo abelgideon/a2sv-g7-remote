@@ -1,0 +1,17 @@
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        prefixProduct = [1] * (len(nums) + 1)
+        suffixProduct = [1] * (len(nums) + 1)
+        res = []
+
+        for i in range(len(nums)):
+            prefixProduct[i+1] = prefixProduct[i] * nums[i]
+        
+        for i in range(len(nums)-1, -1, -1):
+            suffixProduct[i] = suffixProduct[i+1] * nums[i]
+
+        for i in range(len(nums)):
+            res.append(prefixProduct[i] * suffixProduct[i+1])
+        
+        
+        return res
