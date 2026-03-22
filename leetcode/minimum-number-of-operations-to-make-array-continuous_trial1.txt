@@ -1,0 +1,14 @@
+class Solution:
+    def minOperations(self, nums: List[int]) -> int:
+        N = len(nums)
+        nums = sorted(set(nums))
+        res = float("inf")
+
+        R = 0
+        for L in range(len(nums)):
+            while R < len(nums) and nums[R] < nums[L] + N:
+                R += 1
+            
+            res = min(res, N - (R - L))
+        
+        return res
