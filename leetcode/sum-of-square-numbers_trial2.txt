@@ -1,0 +1,14 @@
+class Solution:
+    def judgeSquareSum(self, c: int) -> bool:
+        L = 0
+        R = int(sqrt(c))
+
+        while L <= R:
+            if L ** 2 + R ** 2 == c:
+                return True
+            elif L ** 2 + R ** 2 < c:
+                L += 1
+            else:
+                R -= 1
+        
+        return False
