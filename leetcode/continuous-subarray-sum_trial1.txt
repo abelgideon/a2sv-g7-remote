@@ -1,0 +1,18 @@
+class Solution:
+    def checkSubarraySum(self, nums: List[int], k: int) -> bool:
+        runningSum = 0
+        remainderMap = {0: -1}
+
+        for i in range(len(nums)):
+            runningSum += nums[i]
+            
+            if k != 0:
+                runningSum %= k
+            
+            if runningSum in remainderMap:
+                if i - remainderMap[runningSum] >= 2:
+                    return True
+            else:
+                remainderMap[runningSum] = i
+        
+        return False
