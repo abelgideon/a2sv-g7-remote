@@ -1,0 +1,11 @@
+class Solution:
+    def reductionOperations(self, nums: List[int]) -> int:
+        nums.sort()
+        numsSet = set()
+        res = 0
+
+        for num in nums:
+            numsSet.add(num)
+            res += (len(numsSet) - 1)
+        
+        return res
