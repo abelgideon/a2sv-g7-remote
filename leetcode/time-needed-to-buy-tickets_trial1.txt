@@ -1,0 +1,22 @@
+class Solution:
+    def timeRequiredToBuy(self, tickets: List[int], k: int) -> int:
+        line = deque()
+
+        for i, t in enumerate(tickets):
+            line.append([t, i])
+
+        count = 0
+
+        while len(line) > 0:
+            t = line.popleft()
+            t[0] -= 1
+            if t[0] > 0:
+                line.append(t)
+            
+            count += 1
+
+            if t[0] == 0 and t[1] == k:
+                break
+        
+        return count
+        
