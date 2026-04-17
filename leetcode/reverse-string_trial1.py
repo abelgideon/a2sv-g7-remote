@@ -3,11 +3,10 @@ class Solution:
         """
         Do not return anything, modify s in-place instead.
         """
-        L = 0
-        R = len(s) - 1
-
-        while L < R:
-            s[L], s[R] = s[R], s[L]
-
-            L += 1
-            R -= 1
+        def reverse(l, r):
+            if l < r:
+                s[l], s[r] = s[r], s[l]
+                reverse(l+1, r-1)
+        
+        reverse(0, len(s)-1)
+        
