@@ -1,0 +1,19 @@
+class Solution:
+    def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
+        stack = []
+        posSpeed = []
+
+        for i in range(len(position)):
+            posSpeed.append((position[i], speed[i]))
+        
+        posSpeed.sort()
+
+        for i in range(len(posSpeed)-1, -1, -1):
+            t = (target - posSpeed[i][0]) / posSpeed[i][1]
+
+            if not stack:
+                stack.append(t)
+            elif  t > stack[-1]:
+                stack.append(t)
+        
+        return len(stack)
