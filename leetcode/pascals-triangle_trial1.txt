@@ -1,0 +1,15 @@
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        if numRows == 1:
+            return [[1]]
+        
+        current = [1]
+        history = self.generate(numRows-1)
+        previousLine = history[-1]
+
+        for i in range(numRows-2):
+            current.append(previousLine[i] + previousLine[i+1])
+        
+        current.append(1)
+
+        return history + [current]
